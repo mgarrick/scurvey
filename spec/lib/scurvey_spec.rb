@@ -1,69 +1,61 @@
 require_relative '../../lib/scurvey'
 
 describe Scurvey do
-  #let(:filename) { File.expand_path('../../app/surveys/diversity_survey.rb', File.dirname(__FILE__)) }
+  let(:key) { :key }
+  let(:label) { 'Label' }
 
-  context "opening a survey from a" do
-    let(:key) { :key }
-    let(:label) { 'Label' }
+  context "survey" do
+    it "accepts a key and label" do
+      s = Scurvey.start key, label: label
 
-=begin
-    it "string" do
-      survey_string = <<-EOS
-        survey #{key}, label: "#{label}" do
-        end
-      EOS
-      s = Scurvey.load(survey_string)
       s.key.should == key
       s.label.should == label
     end
 
-    #it "file"
-=end
-
-    it "block" do
-      s = Scurvey.start do |s|
-        s.key key
-        s.label label
-
-        s.question key, label: label do |q|
-        #  q.answer key, label: label
-        end
-      end
-
-      s.key.should == key
-      s.label.should == label
-
-      s.questions.first.key.should == key
-      s.questions.first.label.should == label
-
-=begin
-      s.questions.first.answers.first.key.should == key
-      s.questions.first.answers.first.label.should == label
-=end
+    it "does not require any parameters" do
+      Scurvey.start.key.should be_nil
     end
   end
 
-=begin
-  it "parses questions" do
-    s = Scurvey.begin do |s|
-      s.key key
-      s.label label
+  context "question" do
+    it "accepts a key and label" do
+      question = Scurvey.start do |s|
+        s.question key, label: label
+      end.questions.first
 
-      survey :diversity, label: "Diversity Survey" do
-        #section :demographic do
-        #p "As a federal contractor, University of California is subject to bla bla bla"
-        #p "Submission of this information is voluntary. Bla bla bla"
+      question.key.should == key
+      question.label.should == label
+    end
 
-        question :sex, label: 'Sex' do
-          answer :male, label: 'Male'
-          answer :female, label: 'Female'
-          answer :decline, label: 'Choose not to provide this information'
-        end
-        #end
-      end
-    EOS
-    s = Scurvey.load(survey_string)
+    it "does not require any parameters" do
+      question = Scurvey.start do |s|
+        s.question
+      end.questions.first
+
+      question.key.should be_nil
+    end
   end
-=end
+
+  context "answer" do
+    it "accepts a key and label" do
+      answer = Scurvey.start do |s|
+        s.question do |q|
+          q.answer key, label: label
+        end
+      end.questions.first.answers.first
+
+      answer.key.should == key
+      answer.label.should == label
+    end
+
+    it "does not require any parameters" do
+      answer = Scurvey.start do |s|
+        s.question do |q|
+          q.answer
+        end
+      end.questions.first.answers.first
+
+      answer.key.should be_nil
+    end
+  end
 end

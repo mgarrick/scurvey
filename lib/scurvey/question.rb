@@ -1,6 +1,4 @@
-require_relative 'answer'
-
-class Scurvey
+module Scurvey
   class Question
     include Virtus.model
 

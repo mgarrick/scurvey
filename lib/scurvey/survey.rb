@@ -1,7 +1,4 @@
-require_relative 'question'
-require_relative 'question_dsl'
-
-class Scurvey
+module Scurvey
   class Survey
     include Virtus.model
 

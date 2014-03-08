@@ -1,4 +1,4 @@
-class Scurvey
+module Scurvey
   class SurveyDSL
     def initialize(survey)
       @survey = survey
@@ -12,7 +12,7 @@ class Scurvey
       @survey.label = label
     end
 
-    def question(key, attributes={}, &block)
+    def question(key=nil, attributes={}, &block)
       question = ::Scurvey::Question.new(attributes.merge(key: key))
       @survey.questions << question
       yield ::Scurvey::QuestionDSL.new(question) if block_given?
