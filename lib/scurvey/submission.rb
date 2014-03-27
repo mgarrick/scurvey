@@ -2,6 +2,7 @@ module Scurvey
   class Submission
     include Virtus.model
 
-    attribute :responses, Hash
+    attribute :responses, Array
+    attribute :survey
   end
 end

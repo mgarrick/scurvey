@@ -1,4 +1,4 @@
-require_relative '../../lib/scurvey'
+require 'scurvey'
 
 describe Scurvey do
   let(:key) { :key }

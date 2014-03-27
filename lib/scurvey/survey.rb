@@ -10,6 +10,5 @@ module Scurvey
       super(attributes)
       @questions = []
     end
-
   end
 end

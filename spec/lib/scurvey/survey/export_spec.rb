@@ -1,7 +1,6 @@
 require 'scurvey'
-require 'scurvey/export/json'
 
-describe Scurvey::Export::JSON do
+describe Scurvey::Survey::Export do
   let(:key) { 'survey key' }
   let(:label) { 'survey label' }
   let(:survey) do

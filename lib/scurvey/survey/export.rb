@@ -1,6 +1,6 @@
 module Scurvey
-  module Export
-    class JSON
+  class Survey
+    class Export
       def initialize(survey)
         @survey = survey
       end
@@ -23,6 +23,7 @@ module Scurvey
               end
             end
           end
+
         end
       end
     end
